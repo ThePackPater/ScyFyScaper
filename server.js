@@ -22,7 +22,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 console.log("\n***********************************\n" +
-            "Grabbing every thread name and link\n" +
+            "Grabbing Headlines and links\n" +
             "from ScyFy.com:" +
             "\n***********************************\n");
 
@@ -35,9 +35,9 @@ axios.get("https://www.syfy.com").then(function(response) {
   // An empty array to save the data
   const results = [];
 
-  // With cheerio, find each p-tag with the "title" class
+  // With cheerio, find each headline
   // (i: iterator. element: the current element)
-  $("p.title").each(function(i, element) {
+  $(".teaser").each(function(i, element) {
 
     // Save the text of the element in a "title" variable
     const title = $(element).text();
