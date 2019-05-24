@@ -1,4 +1,4 @@
-# NYTScienceScaper [:science:]
+# NYTScienceScaper [:alien:]
 
 ![Logo](https://github.com/ThePackPater/ScyFyScaper/blob/e6acec87bf62089e2b0280934c73e10a7b388df9/public/assets/nytScience.jpg)
 

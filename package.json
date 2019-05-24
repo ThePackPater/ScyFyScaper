@@ -1,0 +1,36 @@
+{
+  "name": "scyfyscaper",
+  "version": "1.0.0",
+  "description": "![Logo](https://github.com/ThePackPater/ScyFyScaper/blob/e6acec87bf62089e2b0280934c73e10a7b388df9/public/assets/nytScience.jpg)",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.0",
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.1.2",
+    "logger": "0.0.1",
+    "method": "^2.0.0",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.2.6",
+    "mongoose": "^5.5.11",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThePackPater/ScyFyScaper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThePackPater/ScyFyScaper/issues"
+  },
+  "homepage": "https://github.com/ThePackPater/ScyFyScaper#readme"
+}
