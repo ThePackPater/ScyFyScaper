@@ -68,7 +68,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/scrape", function(req, res) {
-	axios.get("https://www.nytimes.com/section/world", function(error, response, html) {
+	axios.get("https://www.nytimes.com/section/science", function(error, response, html) {
 		var $ = cheerio.load(html);
 		var result = {};
 		$("div.story-body").each(function(i, element) {
@@ -96,7 +96,7 @@ app.get("/scrape", function(req, res) {
 				}
 			});
 		});
-		console.log("Scrape finished.");
+		console.log("Scraped.");
 		res.redirect("/");
 	});
 });
@@ -104,7 +104,7 @@ app.get("/scrape", function(req, res) {
 app.get("/saved", function(req, res) {
 	Article.find({issaved: true}, null, {sort: {created: -1}}, function(err, data) {
 		if(data.length === 0) {
-			res.render("placeholder", {message: "You have not saved any articles yet. Try to save some delicious news by simply clicking \"Save Article\"!"});
+			res.render("placeholder", {message: "No saved articles. Try to save some news by clicking \"Save Article\"!"});
 		}
 		else {
 			res.render("saved", {saved: data});
@@ -123,7 +123,7 @@ app.post("/search", function(req, res) {
 	Article.find({$text: {$search: req.body.search, $caseSensitive: false}}, null, {sort: {created: -1}}, function(err, data) {
 		console.log(data);
 		if (data.length === 0) {
-			res.render("placeholder", {message: "Nothing has been found. Please try other keywords."});
+			res.render("placeholder", {message: "No Results. Try other keywords."});
 		}
 		else {
 			res.render("search", {search: data})

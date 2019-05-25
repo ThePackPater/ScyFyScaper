@@ -4,7 +4,9 @@
 }
 
 body {
-	background-color: #eee;
+	font-family: 'Russo One', sans-serif;
+	background:url("../images/bodyBack.jpg") no-repeat center center fixed;
+	background-size: cover;
 }
 
 button {
@@ -29,7 +31,8 @@ header {
 	height: 70px;
 	box-shadow: 0 0 10px #aaa;
 	background-color:black;
-	opacity: 0.9;
+	opacity: 1.7;
+	font-family: 'Russo One', sans-serif;
 }
 
 header button {
@@ -81,9 +84,6 @@ header button {
 	height: 100%;
 	background-color: #92afcc;
 	font-size: 23px;
-	font-weight: bold;
-	color: #fff;
-	opacity: 0.7;
 }
 
 #cover {
@@ -144,6 +144,7 @@ header button {
 	padding: 40px 90px;
 	color: #aaa;
 	background-color: #fff;
+	font-family: 'Russo One', sans-serif;
 }
 
 #addnote {

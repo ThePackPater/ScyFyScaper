@@ -3,17 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<title>New York Times Scraper</title>
+
+		<!-- Bootstrap -->
+    	<link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+   		 />
+		<!-- Font Awesome -->
+    	<link
+      	rel="stylesheet"
+      	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      	integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      	crossorigin="anonymous"
+    	/>
+		<!-- google font -->
+		<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+
+		<title>ScFy Scraper</title>
+
 </head>
 
 <body>
 	<header>
-		<a href="/"><div id="sitename">NYT Scraper</div></a>
+		<a href="/"><div id="sitename">ScFy Scraper</div></a>
 		<a href="/"><button id="all-articles">All Articles</button></a>
 		<a href="/saved"><button id="saved-articles">Saved Articles</button></a>
 		<form action="/scrape" method="GET">
-			<button type="submit" id="refresh-articles">Scrape For Newest Articles</button>
+			<button type="submit" id="refresh-articles">Scrape For Articles</button>
 		</form>
 		<form action="/search" method="POST">
 			<button type="submit" id="search-submit">Submit</button>
