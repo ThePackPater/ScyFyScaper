@@ -1,29 +1,43 @@
 // Dependencies
+var express = require("express");
+var logger = require("morgan");
+var mongoose = require("mongoose");
 
-const express = require("express");
-const method = require("method-override");
-const body = require("body-parser");
-const exphbs = require("express-handlebars");
-const mongoose = require("mongoose");
-const logger = require("morgan");
-const cheerio = require("cheerio");
-const request = require("request");
+var axios = require("axios");
+var cheerio = require("cheerio");
 
-// Mongoose
+var exphbs = require("express-handlebars");
 
-const Note = require("./models/Note");
-const Article = require("./models/Article");
-const databaseUrl = 'mongodb://localhost/scrap';
+//Models req
+var Note = require("./models/Note");
+var Article = require("./models/Article");
 
+var port = process.env.PORT || 3000;
+
+// Initialize Express
+var app = express();
+
+// Use morgan logger for logging requests
+app.use(logger("dev"));
+
+
+// Parse request body as JSON
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
+
+// Make public a static folder
+app.use(express.static("public"));
+
+// Connect to the Mongo DB
 if (process.env.MONGODB_URI) {
 	mongoose.connect(process.env.MONGODB_URI);
 }
 else {
-	mongoose.connect(databaseUrl);
+	mongoose.connect("mongodb://localhost/scraper",  { useNewUrlParser: true });
 };
 
 mongoose.Promise = Promise;
-const db = mongoose.connection;
+var db = mongoose.connection;
 
 db.on("error", function(error) {
 	console.log("Mongoose Error: ", error);
@@ -34,28 +48,18 @@ db.once("open", function() {
 });
 
 
-const app = express();
-const port = process.env.PORT || 3600;
-
 // app set-ups
-
-app.use(logger("dev"));
-app.use(express.static("public"));
-app.use(body.urlencoded({extended: false}));
-app.use(method("_method"));
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
-
 app.listen(port, function() {
 	console.log("Listening on port " + port);
 })
 
 // Routes
-
 app.get("/", function(req, res) {
 	Article.find({}, null, {sort: {created: -1}}, function(err, data) {
 		if(data.length === 0) {
-			res.render("placeholder", {message: "There's nothing scraped yet. Please click \"Scrape For Newest Articles\" for fresh and delicious news."});
+			res.render("placeholder", {message: "Nothing scraped yet. Please click \"Scrape For Newest Articles\" for news."});
 		}
 		else{
 			res.render("index", {articles: data});
@@ -64,14 +68,14 @@ app.get("/", function(req, res) {
 });
 
 app.get("/scrape", function(req, res) {
-	request("https://www.nytimes.com/section/science", function(error, response, html) {
-		const $ = cheerio.load(html);
-		let result = {};
+	axios.get("https://www.nytimes.com/section/world", function(error, response, html) {
+		var $ = cheerio.load(html);
+		var result = {};
 		$("div.story-body").each(function(i, element) {
-			const link = $(element).find("a").attr("href");
-			const title = $(element).find("h2.headline").text().trim();
-			const summary = $(element).find("p.summary").text().trim();
-			const img = $(element).parent().find("figure.media").find("img").attr("src");
+			var link = $(element).find("a").attr("href");
+			var title = $(element).find("h2.headline").text().trim();
+			var summary = $(element).find("p.summary").text().trim();
+			var img = $(element).parent().find("figure.media").find("img").attr("src");
 			result.link = link;
 			result.title = title;
 			if (summary) {
@@ -83,7 +87,7 @@ app.get("/scrape", function(req, res) {
 			else {
 				result.img = $(element).find(".wide-thumb").find("img").attr("src");
 			};
-			const entry = new Article(result);
+			var entry = new Article(result);
 			Article.find({title: result.title}, function(err, data) {
 				if (data.length === 0) {
 					entry.save(function(err, data) {
@@ -143,7 +147,7 @@ app.post("/save/:id", function(req, res) {
 });
 
 app.post("/note/:id", function(req, res) {
-	const note = new Note(req.body);
+	var note = new Note(req.body);
 	note.save(function(err, doc) {
 		if (err) throw err;
 		Article.findByIdAndUpdate(req.params.id, {$set: {"note": doc._id}}, {new: true}, function(err, newdoc) {
@@ -156,7 +160,7 @@ app.post("/note/:id", function(req, res) {
 });
 
 app.get("/note/:id", function(req, res) {
-	const id = req.params.id;
+	var id = req.params.id;
 	Article.findById(id).populate("note").exec(function(err, data) {
 		res.send(data.note);
 	})
