@@ -28,22 +28,26 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
-} else {
-  mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
-}
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.Promise = Promise;
-const db = mongoose.connection;
+mongoose.connect(MONGODB_URI);
 
-db.on("error", function(error) {
-  console.log("Mongoose Error: ", error);
-});
+// if (process.env.MONGODB_URI) {
+//   mongoose.connect(process.env.MONGODB_URI);
+// } else {
+//   mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
+// }
 
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});
+// mongoose.Promise = Promise;
+// const db = mongoose.connection;
+
+// db.on("error", function(error) {
+//   console.log("Mongoose Error: ", error);
+// });
+
+// db.once("open", function() {
+//   console.log("Mongoose connection successful.");
+// });
 
 // app set-ups
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
