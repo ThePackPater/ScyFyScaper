@@ -77,7 +77,7 @@ app.get("/scrape", function(req, res) {
     html
   ) {
     const $ = cheerio.load(html);
-    let result = {};
+    const result = {};
     $("div.story-body").each(function(i, element) {
       const link = $(element)
         .find("a")
