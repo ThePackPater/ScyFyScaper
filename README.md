@@ -1,4 +1,4 @@
-# ScFy Scaper [:alien:]
+# Scy Scaper [:alien:]
 
 ![Logo](https://github.com/ThePackPater/ScyFyScaper/blob/master/public/assets/images/ScreenShot.PNG)
 
