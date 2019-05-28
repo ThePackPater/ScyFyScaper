@@ -12,7 +12,6 @@ function shownote(event) {
 			}
 		});
 	});
-
 }
 
 function addnote(event) {
