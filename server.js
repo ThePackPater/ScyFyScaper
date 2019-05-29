@@ -73,7 +73,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/scrape", function(req, res) {
-  axios.get("https://www.nytimes.com/section/science", function(
+  axios.get("https://www.nytimes.com/section/world", function(
     error,
     response,
     html
