@@ -10,7 +10,7 @@ const exphbs = require("express-handlebars");
 
 //Models req
 const Note = require("./models/note");
-const Article = require("./models/Article");
+const Article = require("./models/article");
 
 const port = process.env.PORT || 3000;
 
