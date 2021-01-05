@@ -4,7 +4,7 @@
   "description": "![Logo](https://github.com/ThePackPater/ScyFyScaper/blob/e6acec87bf62089e2b0280934c73e10a7b388df9/public/assets/nytScience.jpg)",
   "main": "server.js",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
